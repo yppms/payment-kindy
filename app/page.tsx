@@ -45,8 +45,9 @@ const paymentOptions = [
   {
     id: "nitip",
     title: "Nitip",
-    description: "Minimal 1 juta. 50% atau pelunasan paling lambat ",
+    description: "50% atau pelunasan paling lambat ",
     deadline: "13 Juli 2026",
+    minimum: "Rp1.000.000",
   },
 ];
 
@@ -132,7 +133,7 @@ export default function PaymentForm() {
 
           {/* Payment type */}
           <div className="space-y-3">
-            <Label>Pilih Jenis Pembayaran</Label>
+            <p className="text-sm font-bold text-gray-900 tracking-wide uppercase border-l-4 border-blue-500 pl-3">Pilih Jenis Pembayaran</p>
             <RadioGroup
               value={paymentType}
               onValueChange={(value) => {
@@ -155,7 +156,7 @@ export default function PaymentForm() {
                     htmlFor={option.id}
                     className="flex flex-col cursor-pointer pr-16"
                   >
-                    <span className="font-medium text-gray-900">
+                    <span className="font-bold text-gray-900 text-base">
                       {option.title}
                     </span>
                     <span className="text-sm text-gray-500">
@@ -197,6 +198,7 @@ export default function PaymentForm() {
                   placeholder="Nama saudara kandung / sepupu / referal"
                   value={siblingName}
                   onChange={(e) => setSiblingName(e.target.value)}
+                  className="text-sm placeholder:text-xs sm:placeholder:text-sm"
                 />
                 <p className="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
                   ⚠️ Akan diverifikasi oleh pihak sekolah. Apabila tidak valid,
@@ -235,7 +237,12 @@ export default function PaymentForm() {
                   <div className="pt-3 border-t border-gray-200">
                     <div className="flex justify-between font-semibold text-gray-900 text-base">
                       <span>Tagihan</span>
-                      <span>{formatCurrency(totalAmount)}</span>
+                      <span>
+                        {paymentType === "nitip" && (
+                          <span className="text-s font-semibold mr-1">min.</span>
+                        )}
+                        {formatCurrency(totalAmount)}
+                      </span>
                     </div>
                   </div>
                 )}
