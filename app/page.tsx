@@ -45,7 +45,7 @@ const paymentOptions = [
   {
     id: "nitip",
     title: "Nitip",
-    description: "50% atau pelunasan paling lambat ",
+    description: "minimal Rp1.000.000: 50% atau lunas paling lambat ",
     deadline: "13 Juli 2026",
     minimum: "Rp1.000.000",
   },
