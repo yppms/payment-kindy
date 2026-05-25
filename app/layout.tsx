@@ -5,11 +5,17 @@ export const metadata: Metadata = {
   title: "Pembayaran | TKIT Miftahussalam",
   description: "Pembayaran biaya masuk TKIT Miftahussalam",
   icons: {
-    icon: "https://tkitmiftahussalam.instawp.xyz/wp-content/uploads/2022/02/cropped-logo-miftahussalam-192x192.png",
-    apple: "https://tkitmiftahussalam.instawp.xyz/wp-content/uploads/2022/02/cropped-logo-miftahussalam-192x192.png",
-    shortcut: "https://tkitmiftahussalam.instawp.xyz/wp-content/uploads/2022/02/cropped-logo-miftahussalam-192x192.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+    other: [
+      { rel: "manifest", url: "/site.webmanifest" },
+    ],
   },
-    generator: 'v0.app'
+  generator: "v0.app",
 }
 
 export default function RootLayout({
