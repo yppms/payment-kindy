@@ -18,14 +18,12 @@ import {
 const BASE_AMOUNT = 5_000_000;
 const LUNAS_DISCOUNT = 250_000;
 const SIBLING_DISCOUNT_RATE = 0.1;
-const NITIP_MINIMUM = 1_000_000;
 
 const PAYMENT_LINKS: Record<string, string> = {
   lunas: "https://app.midtrans.com/payment-links/yppms-tk-2627-l-2ktDulim",
   "lunas-diskon": "https://app.midtrans.com/payment-links/yppms-tk-2627-l-d-swgyKCeY",
   "50persen": "https://app.midtrans.com/payment-links/yppms-tk-2627-50-P1F3uWR5",
   "50persen-diskon": "https://app.midtrans.com/payment-links/yppms-tk-2627-50-d-WXRUHSai",
-  nitip: "https://app.midtrans.com/payment-links/yppms-tk-2627-n-0WPbiJW4",
 };
 
 const paymentOptions = [
@@ -41,13 +39,6 @@ const paymentOptions = [
     title: "50%",
     description: "Bayar dalam 2 termin: 50% saat ini dan 50% paling lambat ",
     deadline: "31 Oktober 2026",
-  },
-  {
-    id: "nitip",
-    title: "Nitip",
-    description: "minimal Rp1.000.000: 50% atau lunas paling lambat ",
-    deadline: "13 Juli 2026",
-    minimum: "Rp1.000.000",
   },
 ];
 
@@ -81,13 +72,11 @@ export default function PaymentForm() {
       ? discountedBase - LUNAS_DISCOUNT
       : paymentType === "50persen"
         ? discountedBase / 2
-        : paymentType === "nitip"
-          ? NITIP_MINIMUM
-          : 0;
+        : 0;
 
   const handlePaymentClick = () => {
     if (!paymentType) return;
-    const key = siblingActive && paymentType !== "nitip" ? `${paymentType}-diskon` : paymentType;
+    const key = siblingActive ? `${paymentType}-diskon` : paymentType;
     const link = PAYMENT_LINKS[key];
     if (link) window.open(link, "_blank");
   };
@@ -237,12 +226,7 @@ export default function PaymentForm() {
                   <div className="pt-3 border-t border-gray-200">
                     <div className="flex justify-between font-semibold text-gray-900 text-base">
                       <span>Tagihan</span>
-                      <span>
-                        {paymentType === "nitip" && (
-                          <span className="text-s font-semibold mr-1">min.</span>
-                        )}
-                        {formatCurrency(totalAmount)}
-                      </span>
+                      <span>{formatCurrency(totalAmount)}</span>
                     </div>
                   </div>
                 )}
